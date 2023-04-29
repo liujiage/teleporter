@@ -100,7 +100,8 @@ public class DemoController {
         int hashcodeKey =  SecurityTools.getIP(request).concat(login.getPlainText()).hashCode();
         int ticket = tokenLimitService.require(hashcodeKey, 1 );
         if(ticket == 0){
-            login = new Login(login.getPlainText(), "", "", StatusConst.TOKEN_REQUIRE_OVER_LIMIT);
+            //login = new Login(login.getPlainText(), "", "", StatusConst.TOKEN_REQUIRE_OVER_LIMIT);
+            login.setStatus(StatusConst.TOKEN_REQUIRE_OVER_LIMIT);
             model.addAttribute("login", login);
             return PAGE_TELEPORTER;
         }
